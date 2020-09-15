@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "make weather app (Nor,Kor) to study react",
+    "githubUrl": "https://github.com/TKNam/Study-react-weather.git"
   }
 }

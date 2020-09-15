@@ -4,7 +4,6 @@ import Loading from "./Loading";
 import Weather from "./Weather";
 import * as Location from "expo-location";
 import axios from "axios";
-import UserAgent from "react-native-user-agent";
 
 export default class extends React.Component {
   state = {
@@ -28,6 +27,18 @@ export default class extends React.Component {
       hum: data.properties.timeseries[0].data.instant.details.relative_humidity,
       weathersymbol:
         data.properties.timeseries[0].data.next_1_hours.summary.symbol_code,
+      onehourweathersymbol:
+        data.properties.timeseries[0].data.next_1_hours.summary.symbol_code,
+      sixhourweathersymbol:
+        data.properties.timeseries[0].data.next_6_hours.summary.symbol_code,
+      twelvehourweathersymbol:
+        data.properties.timeseries[0].data.next_12_hours.summary.symbol_code,
+      lowtemp:
+        data.properties.timeseries[0].data.next_6_hours.details
+          .air_temperature_min,
+      hightemp:
+        data.properties.timeseries[0].data.next_6_hours.details
+          .air_temperature_max,
     });
   };
 
@@ -144,24 +155,30 @@ export default class extends React.Component {
   render() {
     const {
       temp,
-      latitude,
-      longitude,
       weathersymbol,
       temp_kor,
       hum_kor,
       hum,
+      onehourweathersymbol,
+      sixhourweathersymbol,
+      twelvehourweathersymbol,
+      lowtemp,
+      hightemp,
     } = this.state;
     return weathersymbol == null ? (
       <Loading />
     ) : (
       <Weather
         temp={temp}
-        latitude={latitude}
-        longitude={longitude}
         weathersymbol={weathersymbol}
         temp_kor={temp_kor}
         hum_kor={hum_kor}
         hum={hum}
+        onehourweathersymbol={onehourweathersymbol}
+        sixhourweathersymbol={sixhourweathersymbol}
+        twelvehourweathersymbol={twelvehourweathersymbol}
+        lowtemp={lowtemp}
+        hightemp={hightemp}
       />
     );
   }
